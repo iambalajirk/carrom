@@ -60,6 +60,8 @@ module Game
         private
 
         def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_pocketed = 1, args = {})
+            handle_wrong_pocket(player, coin_type, coins_pocketed) && return if !player_manager.valid_action(player, coin_type)
+                
             remaining_coin_count = coin_manager.remaining_count(coin_type)
             if remaining_coin_count <= 0 || ( coins_pocketed > remaining_coin_count )
                 puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
@@ -84,6 +86,13 @@ module Game
                 player_manager.decrement_points(player, DECREMENT_POINTS[:fouls])
                 player_manager.reset_fouls(player)
             end
+        end
+
+        def handle_wrong_pocket(player, coin_type, coins_pocketed)
+            puts "#{player} pocketed a #{coin_type.upcase} coin. decrementing points..."
+
+            perform_decrement_action(player, DECREMENT_POINTS[:wrong_pocket])
+            coin_manager.discard_coins(coin_type, coins_pocketed)
         end
     end
 end

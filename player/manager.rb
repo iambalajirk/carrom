@@ -65,10 +65,16 @@ module Player
             player.fouls
         end
 
-        def reset_fouls(player)
-            player = get_player(player)
+        def reset_fouls(name)
+            player = get_player(name)
 
             player.fouls = 0
+        end
+
+        def valid_action(name, coin_type)
+            player = get_player(name)
+
+            player.coins_allowed.include? coin_type
         end
 
         def get_player(name)

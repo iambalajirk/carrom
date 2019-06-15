@@ -23,8 +23,10 @@ module Coin
             defunct_coin: 2,
             striker_strike: 1,
             missed_strike: 1,
-            fouls: 1
+            fouls: 1,
+            wrong_pocket: 1,
         }
+
 
         MAXIMUM_DISCARD_COINS = {
             multi_strike: 2
