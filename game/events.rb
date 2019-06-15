@@ -12,10 +12,15 @@ module Game
         end
 
         def handle_multi_strike_event(performed_by, args={})
-            coin_type = args[:coin_type] || COIN_TYPES[:black]
             points = INCREMENT_POINTS[:multi_strike]
 
-            perform_coin_pocketed_action(performed_by, points, coin_type, MAXIMUM_DISCARD_COINS[:multi_strike])
+            args[:coins_pocketed].each do |coin_type, coins_pocketed|
+                if coins_pocketed >=2
+                    perform_coin_pocketed_action(performed_by, points, coin_type,  MAXIMUM_DISCARD_COINS[:multi_strike]) 
+                else
+                    handle_strike_event(performed_by, {coin_type: coin_type})
+                end
+            end
         end
 
         def handle_red_strike_event(performed_by, args={})

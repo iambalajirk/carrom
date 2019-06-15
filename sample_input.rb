@@ -17,92 +17,92 @@ module SampleInput
             [
                 [ EVENT_TYPES[:STRIKE], { performed_by: player_one, coin_type: COIN_TYPES[:white] }],
                 [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 3 }],
+                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: { COIN_TYPES[:white] => 2, COIN_TYPES[:black] => 1} }],
                 [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
+                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: { COIN_TYPES[:white] => 1, COIN_TYPES[:black] => 1} }],
                 [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
                 [ EVENT_TYPES[:STRIKE], { performed_by: player_one, coin_type: COIN_TYPES[:black] }],
                 [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two}]
             ],
-            [
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 4 }],
-                [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2 }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2}],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:RED_STRIKE], { performed_by: player_one }],
-            ],
-            [
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 4 }],
-                [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2 }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2}],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:RED_STRIKE], { performed_by: player_one }],
-            ],
-            [
-                [ 
-                    EVENT_TYPES[:DEFUNCT_COIN], { 
-                        performed_by: player_one,
-                        defunct_coins: {
-                            COIN_TYPES[:black] => 1,
-                            COIN_TYPES[:white] => 2,
-                        }
-                    }
-                ],
-                [
-                    EVENT_TYPES[:DEFUNCT_COIN], { 
-                        performed_by: player_two,
-                        defunct_coins: {
-                            COIN_TYPES[:red] => 1,
-                            COIN_TYPES[:black] => 1
-                        }
-                    }
-                ],
-                [
-                    EVENT_TYPES[:DEFUNCT_COIN], { 
-                        performed_by: player_one,
-                        defunct_coins: {
-                            COIN_TYPES[:black] => 2
-                        }
-                    }
-                ],
-                [
-                    EVENT_TYPES[:DEFUNCT_COIN], { 
-                        performed_by: player_one,
-                        defunct_coins: {
-                            COIN_TYPES[:red] => 1
-                        }
-                    }
-                ],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
-                [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2 }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
-                [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
-                [ EVENT_TYPES[:STRIKE], { performed_by: player_one }],
-            ]
+            # [
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 4 }],
+            #     [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2 }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2}],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:RED_STRIKE], { performed_by: player_one }],
+            # ],
+            # [
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 4 }],
+            #     [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2 }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2}],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:STRIKER_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:RED_STRIKE], { performed_by: player_one }],
+            # ],
+            # [
+            #     [ 
+            #         EVENT_TYPES[:DEFUNCT_COIN], { 
+            #             performed_by: player_one,
+            #             defunct_coins: {
+            #                 COIN_TYPES[:black] => 1,
+            #                 COIN_TYPES[:white] => 2,
+            #             }
+            #         }
+            #     ],
+            #     [
+            #         EVENT_TYPES[:DEFUNCT_COIN], { 
+            #             performed_by: player_two,
+            #             defunct_coins: {
+            #                 COIN_TYPES[:red] => 1,
+            #                 COIN_TYPES[:black] => 1
+            #             }
+            #         }
+            #     ],
+            #     [
+            #         EVENT_TYPES[:DEFUNCT_COIN], { 
+            #             performed_by: player_one,
+            #             defunct_coins: {
+            #                 COIN_TYPES[:black] => 2
+            #             }
+            #         }
+            #     ],
+            #     [
+            #         EVENT_TYPES[:DEFUNCT_COIN], { 
+            #             performed_by: player_one,
+            #             defunct_coins: {
+            #                 COIN_TYPES[:red] => 1
+            #             }
+            #         }
+            #     ],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
+            #     [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_two, coins_pocketed: 2 }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_one }],
+            #     [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
+            #     [ EVENT_TYPES[:STRIKE], { performed_by: player_one }],
+            # ]
         ]
     end
 end
