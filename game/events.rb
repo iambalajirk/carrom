@@ -82,6 +82,7 @@ module Game
                 puts "Decrementing a point as #{player} has commited #{FOULS_LIMIT} new fouls and resetting fouls...."
 
                 player_manager.decrement_points(player, DECREMENT_POINTS[:fouls])
+                player_manager.increment_skip_turns(player)
                 player_manager.reset_fouls(player)
             end
         end

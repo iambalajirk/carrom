@@ -7,18 +7,13 @@ class EventHandler
         @game_manager = game_manager
     end
 
-    # Only event name or the args as well.
-    def valid_event(event, args)
-        true
-    end
 
     # For each of the event, 
     # 1. perform the event.
     # 2. Print status after the event.
     def handle(event, args={})
-        return unless valid_event(event, args)
-
         performed_by = args.delete(:performed_by)
+        return unless game_manager.validate_event(performed_by, event, args)
 
         puts "Received (#{event} event), Performed By: #{performed_by}, Options: #{args.inspect}"
         game_manager.send("handle_#{event}_event", performed_by, args)

@@ -17,6 +17,18 @@ module Game
             @player_manager = Player::Manager.new
         end
 
+        def validate_event(performed_by, event, args = {})
+            player = player_manager.get_details(performed_by)
+
+            if player[:skip_turns] > 0
+                puts "Skipping #{performed_by} turn..."
+                player_manager.decrement_skip_turns(performed_by)
+                return false
+            end
+
+            true
+        end
+
         def status
             player_manager.statuses.each do |player|
                 puts "PLAYER: #{player[:name]}, Points: #{player[:points]}, Fouls: #{player[:fouls]}, Misses: #{player[:misses]}"

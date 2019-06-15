@@ -34,6 +34,12 @@ module Player
             end
         end
 
+        def get_details(name)
+            player = get_player(name)
+
+            player.details
+        end
+
         def increment_points(name, points=1)
             player = get_player(name)
 
@@ -69,6 +75,18 @@ module Player
             player = get_player(player)
 
             player.fouls = 0
+        end
+
+        def increment_skip_turns(player)
+            player = get_player(player)
+
+            player.skip_turns = player.skip_turns + 1 
+        end
+
+        def decrement_skip_turns(player)
+            player = get_player(player)
+
+            player.skip_turns = player.skip_turns - 1 
         end
 
         def get_player(name)
