@@ -23,15 +23,12 @@ module Player
         end
 
         def leader_trailer_status
-            player = players.values
-            player_one = player[0]
-            player_two = player[1]
+            sorted_players = players.sort_by {|name, value| value.points}.reverse.to_h
+            player = sorted_players.values
+            leader = player[0]
+            trailer = player[1]
 
-            if (player_one.points > player_two.points)
-                { leader: player_one.details, trailer: player_two.details }
-            else
-                { leader: player_two.details, trailer: player_one.details }
-            end
+            { leader: leader.details, trailer: trailer.details }
         end
 
         def increment_points(name, points=1)

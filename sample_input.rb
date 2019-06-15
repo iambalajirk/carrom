@@ -10,13 +10,16 @@ module SampleInput
     def simulations
         player_one_configs = PLAYER[:ONE]
         player_two_configs = PLAYER[:TWO]
+        player_three_configs = PLAYER[:THREE]
         player_one = player_one_configs[:name]
         player_two = player_two_configs[:name]
+        player_three = player_three_configs[:name]
 
         [
             [
                 [ EVENT_TYPES[:STRIKE], { performed_by: player_one }],
                 [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
+                [ EVENT_TYPES[:STRIKE], { performed_by: player_three }],
                 [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 3 }],
                 [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
                 [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 2 }],
