@@ -65,8 +65,8 @@ module Player
             player.fouls
         end
 
-        def reset_fouls(performed_by)
-            player = get_player(performed_by)
+        def reset_fouls(player)
+            player = get_player(player)
 
             player.fouls = 0
         end

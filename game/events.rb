@@ -59,15 +59,15 @@ module Game
 
         private
 
-        def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_to_discard = 1, args = {})
+        def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_pocketed = 1, args = {})
             remaining_coin_count = coin_manager.remaining_count(coin_type)
-            if remaining_coin_count <= 0 || ( coins_to_discard > remaining_coin_count )
+            if remaining_coin_count <= 0 || ( coins_pocketed > remaining_coin_count )
                 puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
                 return
             end
             
             player_manager.increment_points(player, points_to_award)
-            coin_manager.discard_coins(coin_type, coins_to_discard)
+            coin_manager.discard_coins(coin_type, coins_pocketed)
         end
 
         def perform_decrement_action(player, point_to_reduce, increment_fouls = true, fouls_to_increase = 1)
