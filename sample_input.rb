@@ -15,7 +15,7 @@ module SampleInput
 
         [
             [
-                [ EVENT_TYPES[:STRIKE], { performed_by: player_one }],
+                [ EVENT_TYPES[:STRIKE], { performed_by: player_one, coin_type: COIN_TYPES[:white] }],
                 [ EVENT_TYPES[:STRIKE], { performed_by: player_two }],
                 [ EVENT_TYPES[:MULTI_STRIKE], { performed_by: player_one, coins_pocketed: 3 }],
                 [ EVENT_TYPES[:MISSED_STRIKE], { performed_by: player_two }],
@@ -67,7 +67,8 @@ module SampleInput
                     EVENT_TYPES[:DEFUNCT_COIN], { 
                         performed_by: player_one,
                         defunct_coins: {
-                            COIN_TYPES[:black] => 1
+                            COIN_TYPES[:black] => 1,
+                            COIN_TYPES[:white] => 2,
                         }
                     }
                 ],
