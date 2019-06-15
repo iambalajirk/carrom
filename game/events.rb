@@ -33,36 +33,35 @@ module Game
 
         def handle_defunct_coin_event(performed_by, args={})
             args[:defunct_coins].each do |coin_type, coins_to_discard|
-                points_to_decrease = coins_to_discard * DECREMENT_POINTS[:defunct_coin]
-                remaining_count = coin_manager.remaining_count(coin_type)
-
-                if remaining_count <= 0 || ( coins_to_discard > remaining_count )
+                remaining_coin_count = coin_manager.remaining_count(coin_type)
+                if remaining_coin_count <= 0 || ( coins_to_discard > remaining_coin_count )
                     puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
                     next
                 end
 
+                points_to_decrease = coins_to_discard * DECREMENT_POINTS[:defunct_coin]
                 coin_manager.discard_coins(coin_type, coins_to_discard)
                 perform_decrement_action(performed_by, points_to_decrease)
             end
         end
 
-        def handle_missed_strike_event(performed_by, args={})
-            misses = player_manager.increment_misses(performed_by)
+        def handle_missed_strike_event(player, args={})
+            misses = player_manager.increment_misses(player)
 
             if misses >= MISSES_LIMIT
-                puts "Decrementing a point as #{performed_by} has done #{MISSES_LIMIT} misses and resetting misses...."
+                puts "Decrementing a point as #{player} has done #{MISSES_LIMIT} misses and resetting misses...."
 
                 points_to_decrease = DECREMENT_POINTS[:missed_strike]
-                perform_decrement_action(performed_by, points_to_decrease)
-                player_manager.reset_misses(performed_by)
+                perform_decrement_action(player, points_to_decrease)
+                player_manager.reset_misses(player)
             end
         end
 
         private
 
         def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_to_discard = 1, args = {})
-            remaining_count = coin_manager.remaining_count(coin_type)
-            if remaining_count <= 0 || ( coins_to_discard > remaining_count )
+            remaining_coin_count = coin_manager.remaining_count(coin_type)
+            if remaining_coin_count <= 0 || ( coins_to_discard > remaining_coin_count )
                 puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
                 return
             end
