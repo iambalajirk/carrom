@@ -34,6 +34,10 @@ module Player
             end
         end
 
+        def all_players
+            players.map {|name, player| player.details }
+        end
+
         def increment_points(name, points=1)
             player = get_player(name)
 
