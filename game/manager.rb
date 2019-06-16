@@ -17,13 +17,17 @@ module Game
             @player_manager = Player::Manager.new
         end
 
-        def status
+        def print_status
+            puts "Player stats...."
             player_manager.statuses.each do |player|
-                puts "PLAYER: #{player[:name]}, Points: #{player[:points]}, Fouls: #{player[:fouls]}, Misses: #{player[:misses]}"
+                player.each { |key, value| print "#{key.upcase}: #{value} | " }
+                puts
             end
 
+            puts "Coin stats...."
             coin_manager.statuses.each do |coin|
-                puts "COIN: #{coin[:type]}, left: #{coin[:count]}"
+                coin.each { |key, value| print "#{key.upcase}: #{value} | "}
+                puts
             end
         end
 
@@ -37,7 +41,7 @@ module Game
             someone_won ? true : false
         end
 
-        def continue_turn(event, performed_by, args={})
+        def continue_turn?(event, performed_by, args={})
             CONTINUE_EVENT[event]
         end
 

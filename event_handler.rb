@@ -1,6 +1,8 @@
-# Responsibility
+require_relative './game/constants'
 # Receives the event, Validate the event, perform the event by calling game_manager, print the status after the event.
 class EventHandler
+    include Game::Constants
+
     attr_accessor :game_manager
 
     def initialize(game_manager)
@@ -9,12 +11,11 @@ class EventHandler
 
     # Only event name or the args as well.
     def valid_event(event, args)
-        true
+        EVENT_TYPES.include? event
     end
 
-    # For each of the event, 
-    # 1. perform the event.
-    # 2. Print status after the event.
+    # For each of the events received, 
+    # Perform the event and print status after the event.
     def handle(event, args={})
         return unless valid_event(event, args)
 
@@ -24,13 +25,7 @@ class EventHandler
         game_manager.send("handle_#{event}_event", performed_by, args)
         puts "Completed (#{event} event)"
         
-        puts "Status......"
-        game_manager.status
+        game_manager.print_status
     end
 
-    def continue(event, args)
-        performed_by = args.delete(:performed_by)
-
-        game_manager.continue_turn(event, performed_by, args)
-    end
 end

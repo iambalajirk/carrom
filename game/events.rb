@@ -34,8 +34,9 @@ module Game
         def handle_defunct_coin_event(performed_by, args={})
             args[:defunct_coins].each do |coin_type, coins_to_discard|
                 remaining_coin_count = coin_manager.remaining_count(coin_type)
+
                 if remaining_coin_count <= 0 || ( coins_to_discard > remaining_coin_count )
-                    puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
+                    puts ERROR_MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
                     next
                 end
 
@@ -61,9 +62,10 @@ module Game
 
         def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_pocketed = 1, args = {})
             remaining_coin_count = coin_manager.remaining_count(coin_type)
+
             if remaining_coin_count <= 0 || ( coins_pocketed > remaining_coin_count )
-                puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
-                return
+                puts ERROR_MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
+                return ERRORS[:not_enough_coins]
             end
             
             player_manager.increment_points(player, points_to_award)

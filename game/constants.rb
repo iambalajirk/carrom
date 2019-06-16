@@ -1,6 +1,6 @@
 module Game
     module Constants
-        EVENT_TYPES = {
+        EVENTS = {
             STRIKE: 'strike',
             MULTI_STRIKE: 'multi_strike',
             RED_STRIKE: 'red_strike',
@@ -9,6 +9,8 @@ module Game
             MISSED_STRIKE: 'missed_strike'
         }
 
+        EVENT_TYPES = EVENTS.values.freeze
+
         MISSES_LIMIT = 3
         FOULS_LIMIT = 3
         
@@ -16,12 +18,31 @@ module Game
         MINIMUM_DIFFERENCE_TO_WIN = 3
 
         CONTINUE_EVENT = {
-            EVENT_TYPES[:STRIKE] => true,
-            EVENT_TYPES[:MULTI_STRIKE] => true,
-            EVENT_TYPES[:RED_STRIKE] => true,
-            EVENT_TYPES[:STRIKER_STRIKE] => false,
-            EVENT_TYPES[:DEFUNCT_COIN] => false,
-            EVENT_TYPES[:MISSED_STRIKE] => false,
+            EVENTS[:STRIKE] => false,
+            EVENTS[:MULTI_STRIKE] => false,
+            EVENTS[:RED_STRIKE] => false,
+            EVENTS[:STRIKER_STRIKE] => false,
+            EVENTS[:DEFUNCT_COIN] => false,
+            EVENTS[:MISSED_STRIKE] => false,
+        }
+
+        DECREMENT_POINTS = {
+            defunct_coin: 2,
+            striker_strike: 1,
+            missed_strike: 1,
+            fouls: 1
+        }
+
+        MAXIMUM_DISCARD_COINS = {
+            multi_strike: 2
+        }
+
+        ERRORS = {
+            not_enough_coins: "Not enough coins"
+        }
+
+        ERROR_MESSAGES = {
+            not_enough_coins: "(Invalid event) Not enough %{coin_type} coins to perform event..."
         }
     end
 end

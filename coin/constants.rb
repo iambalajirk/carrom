@@ -15,16 +15,5 @@ module Coin
             COIN_TYPES[:red] => 3,
             :multi_strike => 2
         }
-
-        DECREMENT_POINTS = {
-            defunct_coin: 2,
-            striker_strike: 1,
-            missed_strike: 1,
-            fouls: 1
-        }
-
-        MAXIMUM_DISCARD_COINS = {
-            multi_strike: 2
-        }
     end
 end

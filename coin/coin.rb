@@ -9,8 +9,8 @@ module Coin
 
         def details
             {
+                type: type,
                 count: count,
-                type: type
             }
         end
     end
