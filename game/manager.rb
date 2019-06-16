@@ -19,12 +19,20 @@ module Game
 
         def status
             player_manager.statuses.each do |player|
-                puts "PLAYER: #{player[:name]}, Points: #{player[:points]}, Fouls: #{player[:fouls]}, Misses: #{player[:misses]}"
+                player.each do |key, value|
+                    print "#{key.upcase}: #{value} | "
+                end
+                puts
+                # puts "PLAYER: #{player[:name]}, Points: #{player[:points]}, Fouls: #{player[:fouls]}, Misses: #{player[:misses]}"
             end
 
             coin_manager.statuses.each do |coin|
                 puts "COIN: #{coin[:type]}, left: #{coin[:count]}"
             end
+        end
+
+        def continue_turn(event, performed_by, args={})
+            CONTINUE_EVENT[event]
         end
 
         def completed

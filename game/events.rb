@@ -15,7 +15,7 @@ module Game
             points = INCREMENT_POINTS[:multi_strike]
 
             args[:coins_pocketed].each do |coin_type, coins_pocketed|
-                if coins_pocketed >=2
+                if coins_pocketed >= 2
                     perform_coin_pocketed_action(performed_by, points, coin_type,  MAXIMUM_DISCARD_COINS[:multi_strike]) 
                 else
                     handle_strike_event(performed_by, {coin_type: coin_type})
@@ -24,16 +24,32 @@ module Game
         end
 
         def handle_red_strike_event(performed_by, args={})
-            coin_type = COIN_TYPES[:red]
-            points = INCREMENT_POINTS[coin_type]
+            red_coin = COIN_TYPES[:red]
+            points = INCREMENT_POINTS[red_coin]
 
             player = player_manager.details(performed_by)
-            player_primary_coin = player[:coins_allowed].find { |coin| coin != COIN_TYPES[:red] }
+            primary_coin = player[:coins_allowed].find { |coin| coin != COIN_TYPES[:red] }
+            coins_pocketed = args[:coins_pocketed] || []
 
-            if player[:coins_pocketed][player_primary_coin] > 0
-                perform_coin_pocketed_action(performed_by, points, coin_type)
+            if player[:coins_pocketed][primary_coin] > 0
+                if coins_pocketed.empty?
+                   puts "Pushing Red coin to the queue and wait for the next turn..."
+                else
+                    coins_pocketed.each do |coin, count|
+                        normal_coin_points = count * INCREMENT_POINTS[coin]
+                        result = perform_coin_pocketed_action(performed_by, normal_coin_points, coin)
+
+                        if (result != "Wrong pocket" || result != "Not enough coins")
+                            perform_coin_pocketed_action(performed_by, points, red_coin)
+                        end
+                    end
+                end
             else
-                puts "#{performed_by} has not pocketed a coin of type #{player_primary_coin.upcase}. So, can't pocket red coin."
+                coins_pocketed.each do |coin, count|
+                    normal_coin_points = count * INCREMENT_POINTS[coin]
+                    result = perform_coin_pocketed_action(performed_by, normal_coin_points, coin)
+                end
+                puts "#{performed_by} has not pocketed a coin of type #{primary_coin.upcase}. So, can't pocket RED coin."
             end
         end
 
@@ -72,12 +88,15 @@ module Game
         private
 
         def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_pocketed = 1, args = {})
-            handle_wrong_pocket(player, coin_type, coins_pocketed) && return if !player_manager.valid_action(player, coin_type)
+            if !player_manager.valid_action(player, coin_type)
+                handle_wrong_pocket(player, coin_type, coins_pocketed) 
+                return  "Wrong pocket"
+            end
                 
             remaining_coin_count = coin_manager.remaining_count(coin_type)
             if remaining_coin_count <= 0 || ( coins_pocketed > remaining_coin_count )
                 puts "(Invalid event) Not enough #{coin_type.upcase} coins to perform event..."
-                return
+                return "Not enough coins"
             end
             
             player_manager.handle_coins_pocketed(player, coin_type, coins_pocketed)
