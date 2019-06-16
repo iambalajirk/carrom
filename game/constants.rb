@@ -41,8 +41,10 @@ module Game
             not_enough_coins: "Not enough coins"
         }
 
-        ERROR_MESSAGES = {
-            not_enough_coins: "(Invalid event) Not enough %{coin_type} coins to perform event..."
+        MESSAGES = {
+            not_enough_coins: "(Invalid event) Not enough %{coin_type} coins to perform event...",
+            decrement_point_for_misses: "Decrementing a point as %{player} has done %{limit} misses and resetting misses....",
+            decrement_point_for_fouls: "Decrementing a point as %{player} has commited %{limit} new fouls and resetting fouls....",
         }
     end
 end

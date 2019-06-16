@@ -36,7 +36,8 @@ module Game
                 remaining_coin_count = coin_manager.remaining_count(coin_type)
 
                 if remaining_coin_count <= 0 || ( coins_to_discard > remaining_coin_count )
-                    puts ERROR_MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
+                    puts MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
+
                     next
                 end
 
@@ -50,7 +51,7 @@ module Game
             misses = player_manager.increment_misses(player)
 
             if misses >= MISSES_LIMIT
-                puts "Decrementing a point as #{player} has done #{MISSES_LIMIT} misses and resetting misses...."
+                puts MESSAGES[:decrement_point_for_misses] % {player: player, limit: MISSES_LIMIT}
 
                 points_to_decrease = DECREMENT_POINTS[:missed_strike]
                 perform_decrement_action(player, points_to_decrease)
@@ -64,7 +65,8 @@ module Game
             remaining_coin_count = coin_manager.remaining_count(coin_type)
 
             if remaining_coin_count <= 0 || ( coins_pocketed > remaining_coin_count )
-                puts ERROR_MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
+                puts MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
+
                 return ERRORS[:not_enough_coins]
             end
             
@@ -81,7 +83,7 @@ module Game
             fouls = player_manager.increment_fouls(player, fouls_to_increase)
 
             if fouls >= FOULS_LIMIT
-                puts "Decrementing a point as #{player} has commited #{FOULS_LIMIT} new fouls and resetting fouls...."
+                puts MESSAGES[:decrement_point_for_fouls] % { player: player, limit: FOULS_LIMIT }
 
                 player_manager.decrement_points(player, DECREMENT_POINTS[:fouls])
                 player_manager.reset_fouls(player)
