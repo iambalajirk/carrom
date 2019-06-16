@@ -27,7 +27,14 @@ module Game
             coin_type = COIN_TYPES[:red]
             points = INCREMENT_POINTS[coin_type]
 
-            perform_coin_pocketed_action(performed_by, points, coin_type)
+            player = player_manager.details(performed_by)
+            player_primary_coin = player[:coins_allowed].find { |coin| coin != COIN_TYPES[:red] }
+
+            if player[:coins_pocketed][player_primary_coin] > 0
+                perform_coin_pocketed_action(performed_by, points, coin_type)
+            else
+                puts "#{performed_by} has not pocketed a coin of type #{player_primary_coin.upcase}. So, can't pocket red coin."
+            end
         end
 
         def handle_striker_strike_event(performed_by, args={})
@@ -73,6 +80,7 @@ module Game
                 return
             end
             
+            player_manager.handle_coins_pocketed(player, coin_type, coins_pocketed)
             player_manager.increment_points(player, points_to_award)
             coin_manager.discard_coins(coin_type, coins_pocketed)
         end

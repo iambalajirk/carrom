@@ -34,8 +34,20 @@ module Player
             end
         end
 
+        def details(name)
+            player = get_player(name)
+
+            player.details
+        end
+
         def all_players
             players.map {|name, player| player.details }
+        end
+
+        def handle_coins_pocketed(name, coin_type, coins_pocketed)
+            player = get_player(name)
+
+            player.coins_pocketed[coin_type] =  player.coins_pocketed[coin_type] + coins_pocketed
         end
 
         def increment_points(name, points=1)
@@ -84,7 +96,11 @@ module Player
         def get_player(name)
             return players[name] unless players[name].nil?
             
-            @players[name] = Player.new({name: name})
+            @players[name] = Player.new({
+                name: name, 
+                coins_allowed: DEFAULT_COINS_ALLOWED, 
+                coins_pocketed: DEFAULT_COINS_POCKETED
+            })
         end
     end
 end
