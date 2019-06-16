@@ -4,6 +4,8 @@ module Game
     module Events
         include Coin::Constants
 
+        private
+
         def handle_strike_event(performed_by, args={})
             coin_type = args[:coin_type] || COIN_TYPES[:black]
             points = INCREMENT_POINTS[coin_type]
@@ -15,7 +17,13 @@ module Game
             coin_type = args[:coin_type] || COIN_TYPES[:black]
             points = INCREMENT_POINTS[:multi_strike]
 
-            perform_coin_pocketed_action(performed_by, points, coin_type, MAXIMUM_DISCARD_COINS[:multi_strike])
+            args[:coins_pocketed].each do |coin_type, coins_pocketed|
+                if coins_pocketed >= 2
+                    perform_coin_pocketed_action(performed_by, points, coin_type,  MAXIMUM_DISCARD_COINS[:multi_strike]) 
+                else
+                    handle_strike_event(performed_by, {coin_type: coin_type})
+                end
+            end
         end
 
         def handle_red_strike_event(performed_by, args={})
@@ -33,14 +41,6 @@ module Game
 
         def handle_defunct_coin_event(performed_by, args={})
             args[:defunct_coins].each do |coin_type, coins_to_discard|
-                remaining_coin_count = coin_manager.remaining_count(coin_type)
-
-                if remaining_coin_count <= 0 || ( coins_to_discard > remaining_coin_count )
-                    puts MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
-
-                    next
-                end
-
                 points_to_decrease = coins_to_discard * DECREMENT_POINTS[:defunct_coin]
                 coin_manager.discard_coins(coin_type, coins_to_discard)
                 perform_decrement_action(performed_by, points_to_decrease)
@@ -59,17 +59,7 @@ module Game
             end
         end
 
-        private
-
         def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_pocketed = 1, args = {})
-            remaining_coin_count = coin_manager.remaining_count(coin_type)
-
-            if remaining_coin_count <= 0 || ( coins_pocketed > remaining_coin_count )
-                puts MESSAGES[:not_enough_coins] % {coin_type: coin_type.upcase}
-
-                return ERRORS[:not_enough_coins]
-            end
-            
             player_manager.increment_points(player, points_to_award)
             coin_manager.discard_coins(coin_type, coins_pocketed)
         end

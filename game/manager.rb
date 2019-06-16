@@ -2,6 +2,7 @@
 # Contains the game logic.
 require_relative './events'
 require_relative './constants'
+require_relative './validator'
 require_relative '../coin/manager'
 require_relative '../player/manager'
 
@@ -9,12 +10,20 @@ module Game
     class Manager
         include Events
         include Constants
+        include Validator
 
         attr_accessor :coin_manager, :player_manager
 
         def initialize(options={})
             @coin_manager = Coin::Manager.new
             @player_manager = Player::Manager.new
+        end
+
+        def process_event(event, performed_by, args)
+            return unless valid_event?(event, performed_by, args)
+
+            self.send("handle_#{event}_event", performed_by, args)
+            print_status
         end
 
         def print_status
@@ -58,6 +67,16 @@ module Game
                 end
             else
                 puts "#{leader[:name]} won the game. Final score: #{leader[:points]} - #{trailer[:points]}"
+            end
+        end
+
+        private
+
+        def valid_event?(event, performed_by, args)
+            if respond_to?("validate_#{event}_event", true)
+                send("validate_#{event}_event", performed_by, args) == false ? false : true
+            else
+                true
             end
         end
         
