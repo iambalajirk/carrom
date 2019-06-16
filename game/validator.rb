@@ -1,5 +1,11 @@
+require_relative './constants'
+require_relative '../coin/constants'
+
 module Game
     module Validator
+        include Constants
+        include Coin::Constants
+
         private
 
         def validate_strike_event(performed_by, args)

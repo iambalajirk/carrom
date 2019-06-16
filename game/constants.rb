@@ -8,7 +8,6 @@ module Game
             DEFUNCT_COIN: 'defunct_coin',
             MISSED_STRIKE: 'missed_strike'
         }
-
         EVENT_TYPES = EVENTS.values.freeze
 
         MISSES_LIMIT = 3
@@ -43,8 +42,8 @@ module Game
 
         MESSAGES = {
             not_enough_coins: "(Invalid event) Not enough %{coin_type} coins to perform event...",
-            coin_type_not_present:  "Coin type not present",
-            not_enough_coins_multi_strike: "Not enough coins in multistrike event.",
+            coin_type_not_present: "(Invalid event) Coin type not present",
+            not_enough_coins_multi_strike: "(Invalid event) Not enough coins in multistrike event.",
             decrement_point_for_misses: "Decrementing a point as %{player} has done %{limit} misses and resetting misses....",
             decrement_point_for_fouls: "Decrementing a point as %{player} has commited %{limit} new fouls and resetting fouls....",
         }

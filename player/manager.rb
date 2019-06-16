@@ -55,6 +55,7 @@ module Player
 
         def reset_misses(name)
             player = get_player(name)
+
             player.misses = 0
         end
 
