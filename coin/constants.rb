@@ -1,15 +1,16 @@
 module Coin
     module Constants
         COIN_TYPES = {
+            white: 'white',
             black: 'black',
             red: 'red',
-            white: 'white'
         }
 
         COIN_PROPERTIES = {
+            COIN_TYPES[:white] => {count: 9},
             COIN_TYPES[:black] => {count: 9},
             COIN_TYPES[:red] => {count: 1},
-            COIN_TYPES[:white] => {count: 9},
+            
         }.freeze
         
         INCREMENT_POINTS = {
@@ -26,7 +27,6 @@ module Coin
             fouls: 1,
             wrong_pocket: 1,
         }
-
 
         MAXIMUM_DISCARD_COINS = {
             multi_strike: 2

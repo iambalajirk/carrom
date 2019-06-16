@@ -14,5 +14,14 @@ module Game
         
         MINIMUM_POINTS_TO_WIN = 5
         MINIMUM_DIFFERENCE_TO_WIN = 3
+
+        CONTINUE_EVENT = {
+            EVENT_TYPES[:STRIKE] => true,
+            EVENT_TYPES[:MULTI_STRIKE] => true,
+            EVENT_TYPES[:RED_STRIKE] => true,
+            EVENT_TYPES[:STRIKER_STRIKE] => false,
+            EVENT_TYPES[:DEFUNCT_COIN] => false,
+            EVENT_TYPES[:MISSED_STRIKE] => false,
+        }
     end
 end
