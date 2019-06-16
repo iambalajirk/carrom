@@ -37,6 +37,10 @@ module Game
             someone_won ? true : false
         end
 
+        def continue_turn(event, performed_by, args={})
+            CONTINUE_EVENT[event]
+        end
+
         def print_winner
             puts
             status = player_manager.leader_trailer_status

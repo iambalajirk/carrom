@@ -27,4 +27,10 @@ class EventHandler
         puts "Status......"
         game_manager.status
     end
+
+    def continue(event, args)
+        performed_by = args.delete(:performed_by)
+
+        game_manager.continue_turn(event, performed_by, args)
+    end
 end
