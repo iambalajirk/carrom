@@ -4,6 +4,8 @@ module Game
     module Events
         include Coin::Constants
 
+        private
+
         def handle_strike_event(performed_by, args={})
             coin_type = args[:coin_type] || COIN_TYPES[:black]
             points = INCREMENT_POINTS[coin_type]
@@ -33,7 +35,8 @@ module Game
 
             if player[:coins_pocketed][primary_coin] > 0
                 if coins_pocketed.empty?
-                   puts "Pushing Red coin to the queue and wait for the next turn..."
+                   puts "Pushing Red coin to the queue and waiting for the next turn..."
+                   push_to_event_queue(performed_by, { red_coin_in_queue: true})
                 else
                     coins_pocketed.each do |coin, count|
                         normal_coin_points = count * INCREMENT_POINTS[coin]
@@ -85,8 +88,6 @@ module Game
             end
         end
 
-        private
-
         def perform_coin_pocketed_action(player, points_to_award, coin_type, coins_pocketed = 1, args = {})
             if !player_manager.valid_action(player, coin_type)
                 handle_wrong_pocket(player, coin_type, coins_pocketed) 
@@ -102,6 +103,34 @@ module Game
             player_manager.handle_coins_pocketed(player, coin_type, coins_pocketed)
             player_manager.increment_points(player, points_to_award)
             coin_manager.discard_coins(coin_type, coins_pocketed)
+        end
+
+        def process_event_queue(event, player, args)
+            queue = event_queue[player]
+            return if queue.nil?
+            
+            if queue[:red_coin_in_queue]
+                queue.delete(:red_coin_in_queue)
+                primary_coin = player_manager.primary_coin(player)
+                valid_follow_up_event = [ EVENT_TYPES[:STRIKE], EVENT_TYPES[:MULTI_STRIKE] ].include?(event)
+                valid_follow_up_coin = args[:coin_type] == primary_coin if event == EVENT_TYPES[:STRIKE]
+                valid_follow_up_coin = (args[:coins_pocketed] || {}).keys.include?(primary_coin) if event == EVENT_TYPES[:MULTI_STRIKE] 
+
+                if valid_follow_up_event && valid_follow_up_coin
+                    red_coin = COIN_TYPES[:red]
+                    points = INCREMENT_POINTS[red_coin]
+
+                    perform_coin_pocketed_action(player, points, red_coin)
+                end
+            end
+
+            event_queue.delete(player) if event_queue[player].keys.size == 0
+        end
+
+        def push_to_event_queue(player, property)
+            event_queue[player] = {} if event_queue[player].nil?
+
+            event_queue[player].merge!(property)
         end
 
         def perform_decrement_action(player, point_to_reduce, increment_fouls = true, fouls_to_increase = 1)
@@ -126,5 +155,6 @@ module Game
             perform_decrement_action(player, DECREMENT_POINTS[:wrong_pocket])
             coin_manager.discard_coins(coin_type, coins_pocketed)
         end
+
     end
 end

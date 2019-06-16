@@ -10,11 +10,17 @@ module Game
         include Events
         include Constants
 
-        attr_accessor :coin_manager, :player_manager
+        attr_accessor :coin_manager, :player_manager, :event_queue
 
         def initialize(options={})
             @coin_manager = Coin::Manager.new
             @player_manager = Player::Manager.new
+            @event_queue = {}
+        end
+
+        def process_event(event, performed_by, args)
+            process_event_queue(event, performed_by, args)
+            self.send("handle_#{event}_event", performed_by, args)
         end
 
         def status
@@ -28,6 +34,11 @@ module Game
 
             coin_manager.statuses.each do |coin|
                 puts "COIN: #{coin[:type]}, left: #{coin[:count]}"
+            end
+
+            if event_queue.keys.size > 0
+                puts "Event queue..."
+                puts event_queue.inspect
             end
         end
 

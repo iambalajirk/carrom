@@ -14,11 +14,11 @@ module Player
         def details
             {
                 name: name,
-                coins_allowed: coins_allowed,
-                coins_pocketed: coins_pocketed,
                 points: points,
                 fouls: fouls,
                 misses: misses,
+                coins_allowed: coins_allowed,
+                coins_pocketed: coins_pocketed,
             }
         end
     end

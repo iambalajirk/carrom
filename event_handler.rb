@@ -21,7 +21,7 @@ class EventHandler
         performed_by = args.delete(:performed_by)
 
         puts "Received (#{event} event), Performed By: #{performed_by}, Options: #{args.inspect}"
-        game_manager.send("handle_#{event}_event", performed_by, args)
+        game_manager.process_event(event, performed_by, args)
         puts "Completed (#{event} event)"
         
         puts "Status......"

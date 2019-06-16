@@ -4,10 +4,13 @@
 
 require_relative './player'
 require_relative './constants'
+require_relative '../coin/constants'
 
 module Player
     class Manager
         include Constants
+        include Coin::Constants
+
         attr_accessor :players
 
         def initialize(options={})
@@ -38,6 +41,12 @@ module Player
             player = get_player(name)
 
             player.details
+        end
+
+        def primary_coin(name)
+            player = get_player(name)
+
+            player.coins_allowed.find {|coin| coin != COIN_TYPES[:red]}
         end
 
         def all_players
