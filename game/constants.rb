@@ -16,15 +16,6 @@ module Game
     MINIMUM_POINTS_TO_WIN = 5
     MINIMUM_DIFFERENCE_TO_WIN = 3
 
-    CONTINUE_EVENT = {
-      EVENTS[:STRIKE] => false,
-      EVENTS[:MULTI_STRIKE] => false,
-      EVENTS[:RED_STRIKE] => false,
-      EVENTS[:STRIKER_STRIKE] => false,
-      EVENTS[:DEFUNCT_COIN] => false,
-      EVENTS[:MISSED_STRIKE] => false
-    }.freeze
-
     DECREMENT_POINTS = {
       defunct_coin: 2,
       striker_strike: 1,

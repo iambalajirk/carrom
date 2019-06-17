@@ -38,11 +38,6 @@ module Game
       someone_won ? true : false
     end
 
-    # Function to check whether to continue with current player's turn.
-    def continue_turn?(event, _performed_by, _args = {})
-      CONTINUE_EVENT[event]
-    end
-
     def print_status
       puts 'Player stats....'
       player_manager.statuses.each do |player|

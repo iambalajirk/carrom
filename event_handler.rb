@@ -9,7 +9,6 @@ class EventHandler
     @game = game
   end
 
-  # Only event name or the args as well.
   def valid_event(event, _args)
     EVENT_TYPES.include? event
   end
