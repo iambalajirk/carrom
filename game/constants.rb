@@ -1,5 +1,9 @@
+require_relative '../coin/constants'
+
 module Game
   module Constants
+    include Coin::Constants
+    
     EVENTS = {
       STRIKE: 'strike',
       MULTI_STRIKE: 'multi_strike',
@@ -8,6 +12,7 @@ module Game
       DEFUNCT_COIN: 'defunct_coin',
       MISSED_STRIKE: 'missed_strike'
     }.freeze
+
     EVENT_TYPES = EVENTS.values.freeze
 
     MISSES_LIMIT = 3
@@ -15,6 +20,12 @@ module Game
 
     MINIMUM_POINTS_TO_WIN = 5
     MINIMUM_DIFFERENCE_TO_WIN = 3
+
+    INCREMENT_POINTS = {
+      COIN_TYPES[:black] => 1,
+      COIN_TYPES[:red] => 3,
+      :multi_strike => 2
+    }.freeze
 
     DECREMENT_POINTS = {
       defunct_coin: 2,
@@ -25,10 +36,6 @@ module Game
 
     MAXIMUM_DISCARD_COINS = {
       multi_strike: 2
-    }.freeze
-
-    ERRORS = {
-      not_enough_coins: 'Not enough coins'
     }.freeze
 
     MESSAGES = {
@@ -42,7 +49,6 @@ module Game
       unregistered_event: "Invalid event. Event not registered.",
       received_event: "Received (%{event} event), Performed By: %{performed_by}, Options: %{args}",
       completed_event: "Completed (%{event} event)"
-
     }.freeze
   end
 end

@@ -8,14 +8,13 @@ module Game
     private
 
     def handle_strike_event(performed_by, args = {})
-      coin_type = args[:coin_type] || COIN_TYPES[:black]
+      coin_type = args[:coin_type]
       points = INCREMENT_POINTS[coin_type]
 
       perform_coin_pocketed_action(performed_by, points, coin_type)
     end
 
     def handle_multi_strike_event(performed_by, args = {})
-      coin_type = args[:coin_type] || COIN_TYPES[:black]
       points = INCREMENT_POINTS[:multi_strike]
 
       args[:coins_pocketed].each do |coin_type, coins_pocketed|
