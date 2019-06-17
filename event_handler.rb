@@ -1,12 +1,12 @@
 require_relative './game/constants'
-# Receives the event, Validate the event, perform the event by calling game_manager, print the status after the event.
+# Receives the event, Validate the event, perform the event by calling game, print the status after the event.
 class EventHandler
   include Game::Constants
 
-  attr_accessor :game_manager
+  attr_accessor :game
 
-  def initialize(game_manager)
-    @game_manager = game_manager
+  def initialize(game)
+    @game = game
   end
 
   # Only event name or the args as well.
@@ -23,7 +23,7 @@ class EventHandler
     end
 
     puts "Received (#{event} event), Performed By: #{performed_by}, Options: #{args.inspect}"
-    game_manager.process_event(event, performed_by, args)
+    game.process_event(event, performed_by, args)
     puts "Completed (#{event} event)"
   end
 end

@@ -13,19 +13,63 @@ class EventsTest < Test::Unit::TestCase
         puts
         @player_one = PLAYER[:ONE][:name]
         @player_two = PLAYER[:TWO][:name]
-        @game_manager = Game::Manager.new
+        @game = Game::Manager.new
     end
 
-    def test_strike_event
-        puts "test_strike_event"
-        event = [ EVENTS[:STRIKE], { performed_by: @player_one, coin_type: COIN_TYPES[:black]}]
-        event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
-        coin_type = event_args[:coin_type]
+    def test_valid_strike_event
+        puts "test_valid_strike_event"
+        event_row = [ EVENTS[:STRIKE], { performed_by: @player_one, coin_type: COIN_TYPES[:black]}]
+        event, args = event_row[0], event_row[1]
+        performed_by = @player_one
+        coin_type = args[:coin_type]
 
-        details = @game_manager.player_manager.statuses.find {|player| player[:name] == performed_by}
-        @game_manager.send("handle_strike_event", performed_by, event_args)
-        updated_details = @game_manager.player_manager.statuses.find {|player| player[:name] == performed_by}
+        details = @game.player_manager.statuses.find {|player| player[:name] == performed_by}
+        remaining_coin_count = @game.coin_manager.remaining_count(coin_type)
+
+        @game.send("handle_strike_event", performed_by, args)
+
+        updated_details = @game.player_manager.statuses.find {|player| player[:name] == performed_by}
+        updated_remaining_coin_count = @game.coin_manager.remaining_count(coin_type)
+
         assert_equal(updated_details[:points] - details[:points], INCREMENT_POINTS[coin_type])
+        assert_equal(remaining_coin_count - updated_remaining_coin_count, 1)
+    end
+
+    def test_multi_strike_event
+        puts "test_multi_strike_event"
+        performed_by = @player_one
+        event_row = [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2 }}]
+        event, args = event_row[0], event_row[1]
+        coin_type, count = args[:coins_pocketed].first[0], args[:coins_pocketed].first[1]
+
+        details = @game.player_manager.statuses.find {|player| player[:name] == performed_by}
+        remaining_coin_count = @game.coin_manager.remaining_count(coin_type)
+
+        @game.send("handle_multi_strike_event", performed_by, args)
+
+        updated_details = @game.player_manager.statuses.find {|player| player[:name] == performed_by}
+        updated_remaining_coin_count = @game.coin_manager.remaining_count(coin_type)
+
+        assert_equal(updated_details[:points] - details[:points], INCREMENT_POINTS[:multi_strike])
+        assert_equal(remaining_coin_count - updated_remaining_coin_count, MAXIMUM_DISCARD_COINS[:multi_strike])
+    end
+
+    def test_multi_strike_with_more_coins_discard_only_limited
+        puts "test_multi_strike_with_more_coins_discard_only_limited"
+        performed_by = @player_one
+        event_row = [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 5 }}]
+        event, args = event_row[0], event_row[1]
+        coin_type, count = args[:coins_pocketed].first[0], args[:coins_pocketed].first[1]
+
+        details = @game.player_manager.statuses.find {|player| player[:name] == performed_by}
+        remaining_coin_count = @game.coin_manager.remaining_count(coin_type)
+
+        @game.send("handle_multi_strike_event", performed_by, args)
+
+        updated_details = @game.player_manager.statuses.find {|player| player[:name] == performed_by}
+        updated_remaining_coin_count = @game.coin_manager.remaining_count(coin_type)
+
+        assert_equal(updated_details[:points] - details[:points], INCREMENT_POINTS[:multi_strike])
+        assert_equal(remaining_coin_count - updated_remaining_coin_count, MAXIMUM_DISCARD_COINS[:multi_strike])
     end
 end

@@ -2,6 +2,7 @@ require_relative '../coin/constants'
 
 module Game
   module Events
+    include Constants
     include Coin::Constants
 
     private
