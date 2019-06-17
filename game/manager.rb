@@ -63,12 +63,12 @@ module Game
 
       if coin_manager.total_coins_left <= 0
         if leader[:points] >= MINIMUM_POINTS_TO_WIN || leader[:points] - trailer[:points] >= MINIMUM_DIFFERENCE_TO_WIN
-          puts "#{leader[:name]} won the game. Final score: #{leader[:points]} - #{trailer[:points]}"
+          puts MESSAGES[:result] % { winner: leader[:name], winner_points: leader[:points], loser_points: trailer[:points]}
         else
-          puts 'Game is a draw'
+          puts MESSAGES[:draw]
         end
       else
-        puts "#{leader[:name]} won the game. Final score: #{leader[:points]} - #{trailer[:points]}"
+        puts MESSAGES[:result] % { winner: leader[:name], winner_points: leader[:points], loser_points: trailer[:points]}
       end
     end
 

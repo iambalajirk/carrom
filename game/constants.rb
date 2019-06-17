@@ -45,7 +45,9 @@ module Game
       coin_type_not_present: '(Invalid event) Coin type not present',
       not_enough_coins_multi_strike: '(Invalid event) Not enough coins in multistrike event.',
       decrement_point_for_misses: 'Decrementing a point as %{player} has done %{limit} misses and resetting misses....',
-      decrement_point_for_fouls: 'Decrementing a point as %{player} has commited %{limit} new fouls and resetting fouls....'
+      decrement_point_for_fouls: 'Decrementing a point as %{player} has commited %{limit} new fouls and resetting fouls....',
+      result: "%{winner} won the game. Final score: %{winner_points} - %{loser_points}",
+      draw: "Game is a draw"
     }.freeze
   end
 end

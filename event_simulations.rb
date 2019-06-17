@@ -21,9 +21,6 @@ module EVENT_SIMULATIONS
           [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2 } }],
           [EVENTS[:RED_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 1 } }],
           [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }],
-          [EVENTS[:MISSED_STRIKE], {}],
-          [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2 } }],
-          [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }]
         ],
         player_two => [
           [EVENTS[:MISSED_STRIKE], {}],
@@ -32,9 +29,19 @@ module EVENT_SIMULATIONS
           [EVENTS[:MISSED_STRIKE], {}],
           [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2 } }],
           [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }],
-          [EVENTS[:MISSED_STRIKE], {}],
+          [EVENTS[:MISSED_STRIKE], {}]
+        ]
+      },
+      {
+        player_one => [
           [EVENTS[:RED_STRIKE], {}],
-          [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2, COIN_TYPES[:black] => 1 } }]
+          [EVENTS[:MISSED_STRIKE], {}],
+          [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2 } }]
+        ],
+        player_two => [
+          [EVENTS[:MISSED_STRIKE], {}],
+          [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 1 } }],
+          [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }]
         ]
       }
     ]
