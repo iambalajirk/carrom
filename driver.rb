@@ -16,13 +16,9 @@ simulations.each_with_index do |simulation, index|
   puts 'Initial status...'
   game_manager.print_status
 
-  player_one = PLAYER[:ONE][:name]
-  player_two = PLAYER[:TWO][:name]
-
-  player_one_index = 0
-  player_two_index = 0
-  player_one_events_length = simulation[player_one].length
-  player_two_events_length = simulation[player_two].length
+  player_one, player_two = PLAYER[:ONE][:name], PLAYER[:TWO][:name]
+  player_one_index, player_two_index = 0, 0
+  player_one_events_length, player_two_events_length = simulation[player_one].length, simulation[player_two].length
 
   game_completed = false
   
