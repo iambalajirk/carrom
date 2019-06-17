@@ -43,6 +43,23 @@ module EVENT_SIMULATIONS
           [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 1 } }],
           [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }]
         ]
+      },
+      {
+        player_one => [
+            [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 2 } }],
+            [EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2 } }],
+            [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }],
+            [EVENTS[:RED_STRIKE], {}],
+            [EVENTS[:MISSED_STRIKE], {}]
+          ],
+          player_two => [
+            [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 2 } }],
+            [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 2 } }],
+            [EVENTS[:MISSED_STRIKE], {}],
+            [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 1 } }],
+            [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }]
+          ]
+
       }
     ]
   end

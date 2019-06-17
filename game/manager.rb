@@ -26,6 +26,23 @@ module Game
       print_status
     end
 
+    # Check game is completed or not?
+    def completed?
+      return true if coin_manager.total_coins_left <= 0
+
+      status = player_manager.leader_trailer_status
+      leader = status[:leader]
+      trailer = status[:trailer]
+
+      someone_won = (leader[:points] >= MINIMUM_POINTS_TO_WIN && leader[:points] - trailer[:points] >= MINIMUM_DIFFERENCE_TO_WIN)
+      someone_won ? true : false
+    end
+
+    # Function to check whether to continue with current player's turn.
+    def continue_turn?(event, _performed_by, _args = {})
+      CONTINUE_EVENT[event]
+    end
+
     def print_status
       puts 'Player stats....'
       player_manager.statuses.each do |player|
@@ -40,22 +57,7 @@ module Game
       end
     end
 
-    def completed
-      return true if coin_manager.total_coins_left <= 0
-
-      status = player_manager.leader_trailer_status
-      leader = status[:leader]
-      trailer = status[:trailer]
-
-      someone_won = (leader[:points] >= MINIMUM_POINTS_TO_WIN && leader[:points] - trailer[:points] >= MINIMUM_DIFFERENCE_TO_WIN)
-      someone_won ? true : false
-    end
-
-    def continue_turn?(event, _performed_by, _args = {})
-      CONTINUE_EVENT[event]
-    end
-
-    def print_winner
+    def final_message
       puts
       status = player_manager.leader_trailer_status
       leader = status[:leader]
