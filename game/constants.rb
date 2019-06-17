@@ -47,7 +47,11 @@ module Game
       decrement_point_for_misses: 'Decrementing a point as %{player} has done %{limit} misses and resetting misses....',
       decrement_point_for_fouls: 'Decrementing a point as %{player} has commited %{limit} new fouls and resetting fouls....',
       result: "%{winner} won the game. Final score: %{winner_points} - %{loser_points}",
-      draw: "Game is a draw"
+      draw: "Game is a draw",
+      unregistered_event: "Invalid event. Event not registered.",
+      received_event: "Received (%{event} event), Performed By: %{performed_by}, Options: %{args}",
+      completed_event: "Completed (%{event} event)"
+
     }.freeze
   end
 end

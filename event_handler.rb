@@ -18,12 +18,12 @@ class EventHandler
   # Perform the event and print status after the event.
   def handle(event, performed_by, args = {})
     unless valid_event(event, args)
-      puts 'Invalid event. Event not registered.'
+      puts MESSAGES[:unregistered_event]
       return
     end
 
-    puts "Received (#{event} event), Performed By: #{performed_by}, Options: #{args.inspect}"
+    puts MESSAGES[:received_event] % { event: event, performed_by: performed_by, args: args.inspect }
     game.process_event(event, performed_by, args)
-    puts "Completed (#{event} event)"
+    puts MESSAGES[:completed_event] % { event: event }
   end
 end
