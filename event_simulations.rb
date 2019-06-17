@@ -59,7 +59,6 @@ module EVENT_SIMULATIONS
             [EVENTS[:DEFUNCT_COIN], { defunct_coins: { COIN_TYPES[:black] => 1 } }],
             [EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black] }]
           ]
-
       }
     ]
   end

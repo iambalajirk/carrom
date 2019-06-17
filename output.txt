@@ -1,0 +1,257 @@
+------------------------------------------------------------------------
+                            Simulation No #1
+------------------------------------------------------------------------
+Initial status...
+Player stats....
+NAME: player_1 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 1 |
+
+Received (missed_strike event), Performed By: player_1, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 0 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 1 |
+Completed (missed_strike event)
+
+Received (missed_strike event), Performed By: player_2, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 0 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 1 |
+Completed (missed_strike event)
+
+Received (defunct_coin event), Performed By: player_1, Options: {:defunct_coins=>{"black"=>10}}
+(Invalid event) Not enough BLACK coins to perform event...
+Completed (defunct_coin event)
+
+Received (defunct_coin event), Performed By: player_2, Options: {:defunct_coins=>{"black"=>1}}
+Player stats....
+NAME: player_1 | POINTS: 0 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: -2 | FOULS: 1 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 8 |
+TYPE: red | COUNT: 1 |
+Completed (defunct_coin event)
+
+Received (red_strike event), Performed By: player_1, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: -2 | FOULS: 1 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 8 |
+TYPE: red | COUNT: 0 |
+Completed (red_strike event)
+
+Received (strike event), Performed By: player_2, Options: {:coin_type=>"black"}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: -1 | FOULS: 1 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 7 |
+TYPE: red | COUNT: 0 |
+Completed (strike event)
+
+Received (defunct_coin event), Performed By: player_1, Options: {:defunct_coins=>{"black"=>1}}
+Player stats....
+NAME: player_1 | POINTS: 1 | FOULS: 1 | MISSES: 1 |
+NAME: player_2 | POINTS: -1 | FOULS: 1 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 6 |
+TYPE: red | COUNT: 0 |
+Completed (defunct_coin event)
+
+Received (missed_strike event), Performed By: player_2, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 1 | FOULS: 1 | MISSES: 1 |
+NAME: player_2 | POINTS: -1 | FOULS: 1 | MISSES: 2 |
+Coin stats....
+TYPE: black | COUNT: 6 |
+TYPE: red | COUNT: 0 |
+Completed (missed_strike event)
+
+Received (multi_strike event), Performed By: player_1, Options: {:coins_pocketed=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 1 | MISSES: 1 |
+NAME: player_2 | POINTS: -1 | FOULS: 1 | MISSES: 2 |
+Coin stats....
+TYPE: black | COUNT: 4 |
+TYPE: red | COUNT: 0 |
+Completed (multi_strike event)
+
+Received (multi_strike event), Performed By: player_2, Options: {:coins_pocketed=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 1 | MISSES: 1 |
+NAME: player_2 | POINTS: 1 | FOULS: 1 | MISSES: 2 |
+Coin stats....
+TYPE: black | COUNT: 2 |
+TYPE: red | COUNT: 0 |
+Completed (multi_strike event)
+
+Received (red_strike event), Performed By: player_1, Options: {:coins_pocketed=>{"black"=>1}}
+(Invalid event) Not enough RED coins to perform event...
+Completed (red_strike event)
+
+Received (strike event), Performed By: player_2, Options: {:coin_type=>"black"}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 1 | MISSES: 1 |
+NAME: player_2 | POINTS: 2 | FOULS: 1 | MISSES: 2 |
+Coin stats....
+TYPE: black | COUNT: 1 |
+TYPE: red | COUNT: 0 |
+Completed (strike event)
+
+Received (strike event), Performed By: player_1, Options: {:coin_type=>"black"}
+Player stats....
+NAME: player_1 | POINTS: 4 | FOULS: 1 | MISSES: 1 |
+NAME: player_2 | POINTS: 2 | FOULS: 1 | MISSES: 2 |
+Coin stats....
+TYPE: black | COUNT: 0 |
+TYPE: red | COUNT: 0 |
+Completed (strike event)
+
+Game is a draw
+
+GAME OVER !!!
+------------------------------------------------------------------------
+                            Simulation No #2
+------------------------------------------------------------------------
+Initial status...
+Player stats....
+NAME: player_1 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 1 |
+
+Received (red_strike event), Performed By: player_1, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 0 | MISSES: 0 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 0 |
+Completed (red_strike event)
+
+Received (missed_strike event), Performed By: player_2, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 0 | MISSES: 0 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 0 |
+Completed (missed_strike event)
+
+Received (missed_strike event), Performed By: player_1, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 0 |
+Completed (missed_strike event)
+
+Received (defunct_coin event), Performed By: player_2, Options: {:defunct_coins=>{"black"=>1}}
+Player stats....
+NAME: player_1 | POINTS: 3 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: -2 | FOULS: 1 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 8 |
+TYPE: red | COUNT: 0 |
+Completed (defunct_coin event)
+
+Received (multi_strike event), Performed By: player_1, Options: {:coins_pocketed=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: 5 | FOULS: 0 | MISSES: 1 |
+NAME: player_2 | POINTS: -2 | FOULS: 1 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 6 |
+TYPE: red | COUNT: 0 |
+Completed (multi_strike event)
+
+player_1 won the game. Final score: 5 - -2
+
+GAME OVER !!!
+------------------------------------------------------------------------
+                            Simulation No #3
+------------------------------------------------------------------------
+Initial status...
+Player stats....
+NAME: player_1 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 9 |
+TYPE: red | COUNT: 1 |
+
+Received (defunct_coin event), Performed By: player_1, Options: {:defunct_coins=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: -4 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: 0 | FOULS: 0 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 7 |
+TYPE: red | COUNT: 1 |
+Completed (defunct_coin event)
+
+Received (defunct_coin event), Performed By: player_2, Options: {:defunct_coins=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: -4 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: -4 | FOULS: 1 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 5 |
+TYPE: red | COUNT: 1 |
+Completed (defunct_coin event)
+
+Received (multi_strike event), Performed By: player_1, Options: {:coins_pocketed=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: -2 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: -4 | FOULS: 1 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 3 |
+TYPE: red | COUNT: 1 |
+Completed (multi_strike event)
+
+Received (defunct_coin event), Performed By: player_2, Options: {:defunct_coins=>{"black"=>2}}
+Player stats....
+NAME: player_1 | POINTS: -2 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: -8 | FOULS: 2 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 1 |
+TYPE: red | COUNT: 1 |
+Completed (defunct_coin event)
+
+Received (strike event), Performed By: player_1, Options: {:coin_type=>"black"}
+Player stats....
+NAME: player_1 | POINTS: -1 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: -8 | FOULS: 2 | MISSES: 0 |
+Coin stats....
+TYPE: black | COUNT: 0 |
+TYPE: red | COUNT: 1 |
+Completed (strike event)
+
+Received (missed_strike event), Performed By: player_2, Options: {}
+Player stats....
+NAME: player_1 | POINTS: -1 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: -8 | FOULS: 2 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 0 |
+TYPE: red | COUNT: 1 |
+Completed (missed_strike event)
+
+Received (red_strike event), Performed By: player_1, Options: {}
+Player stats....
+NAME: player_1 | POINTS: 2 | FOULS: 1 | MISSES: 0 |
+NAME: player_2 | POINTS: -8 | FOULS: 2 | MISSES: 1 |
+Coin stats....
+TYPE: black | COUNT: 0 |
+TYPE: red | COUNT: 0 |
+Completed (red_strike event)
+
+player_1 won the game. Final score: 2 - -8
+
+GAME OVER !!!
