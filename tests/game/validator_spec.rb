@@ -20,9 +20,9 @@ class ValidatorTest < Test::Unit::TestCase
 
     def test_valid_strike_event
         puts 'test_valid_strike_event'
-        event = [ EVENTS[:STRIKE], { performed_by: @player_one, coin_type: COIN_TYPES[:black]}]
+        event = [ EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black]}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
         assert(result)
@@ -32,7 +32,7 @@ class ValidatorTest < Test::Unit::TestCase
         puts 'test_strike_event_without_coin_type'
         event = [ EVENTS[:STRIKE], { performed_by: @player_one}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
         assert_equal(result, false)
@@ -40,9 +40,9 @@ class ValidatorTest < Test::Unit::TestCase
 
     def test_strike_event_without_not_enough_coins
         puts 'test_strike_event_without_not_enough_coins'
-        event = [ EVENTS[:STRIKE], { performed_by: @player_one, coin_type: COIN_TYPES[:black]}]
+        event = [ EVENTS[:STRIKE], { coin_type: COIN_TYPES[:black]}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
         coin_type = event_args[:coin_type]
 
         @game_manager.coin_manager.discard_coins(coin_type, TOTAL_COINS)
@@ -53,9 +53,9 @@ class ValidatorTest < Test::Unit::TestCase
 
     def test_valid_multi_strike_events
         puts 'test_valid_multi_strike_events'
-        event = [ EVENTS[:MULTI_STRIKE], { performed_by: @player_one, coins_pocketed: { COIN_TYPES[:black] => 2}}]
+        event = [ EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 2}}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
         assert(result)
@@ -65,7 +65,7 @@ class ValidatorTest < Test::Unit::TestCase
         puts 'test_multi_strike_events_with_no_coins_pocketed'
         event = [ EVENTS[:MULTI_STRIKE], { performed_by: @player_one}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
         assert_equal(result, false)
@@ -73,9 +73,9 @@ class ValidatorTest < Test::Unit::TestCase
 
     def test_multi_strike_events_with_less_coins_pocketed
         puts 'test_multi_strike_events_with_no_coins_pocketed'
-        event = [ EVENTS[:MULTI_STRIKE], { performed_by: @player_one, coins_pocketed: { COIN_TYPES[:black] => 1}}]
+        event = [ EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 1}}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
         assert_equal(result, false)
@@ -83,9 +83,9 @@ class ValidatorTest < Test::Unit::TestCase
 
     def test_multi_strike_events_with_no_coins_available
         puts 'test_multi_strike_events_with_no_coins_available'
-        event = [ EVENTS[:MULTI_STRIKE], { performed_by: @player_one, coins_pocketed: { COIN_TYPES[:black] => 3}}]
+        event = [ EVENTS[:MULTI_STRIKE], { coins_pocketed: { COIN_TYPES[:black] => 3}}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
         event_args[:coins_pocketed].each do |coin_type, count|
             @game_manager.coin_manager.discard_coins(coin_type, TOTAL_COINS)
             result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
@@ -97,7 +97,7 @@ class ValidatorTest < Test::Unit::TestCase
         puts "test_valid_red_strike"
         event = [ EVENTS[:RED_STRIKE], { performed_by: @player_one}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)
         assert(result)
@@ -107,7 +107,7 @@ class ValidatorTest < Test::Unit::TestCase
         puts "test_red_strike_with_no_coin_left"
         event = [ EVENTS[:RED_STRIKE], { performed_by: @player_one}]
         event_type, event_args = event[0], event[1]
-        performed_by = event_args[:performed_by]
+        performed_by = @player_one
 
         @game_manager.coin_manager.discard_coins(COIN_TYPES[:red], TOTAL_COINS)
         result = @game_manager.send('valid_event?', event_type, performed_by, event_args)

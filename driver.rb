@@ -33,10 +33,11 @@ simulations.each_with_index do |simulation, index|
       puts
 
       # Call event.
-      event = simulation[player_one][player_one_index]
-      event_type = event[0]
-      event_args = event[1]
-      event_handler.handle(event_type, event_args)
+      event_row = simulation[player_one][player_one_index]
+      event = event_row[0]
+      args = event_row[1]
+      performed_by = player_one
+      event_handler.handle(event, performed_by, args)
 
       # Check for game completion.
       if game_manager.completed
@@ -53,7 +54,7 @@ simulations.each_with_index do |simulation, index|
       end
 
       # Check to continue player's turn or hand over the turn to the next player.
-      continue_turn = game_manager.continue_turn?(event_type, player_one, event_args)
+      continue_turn = game_manager.continue_turn?(event, player_one, args)
       if continue_turn
         puts "Continuing #{player_one}'s turn..."
       else
@@ -67,10 +68,11 @@ simulations.each_with_index do |simulation, index|
       puts
 
       # Call event.
-      event = simulation[player_two][player_two_index]
-      event_type = event[0]
-      event_args = event[1]
-      event_handler.handle(event_type, event_args)
+      event_row = simulation[player_two][player_two_index]
+      event = event_row[0]
+      args = event_row[1]
+      performed_by = player_two
+      event_handler.handle(event, performed_by, args)
 
       # Check for game completion.
       if game_manager.completed
@@ -79,7 +81,7 @@ simulations.each_with_index do |simulation, index|
         break
       end
 
-      # Move to next event if present.
+      # Move to next event_row if present.
       player_two_index += 1
       if player_two_index == player_two_length
         puts "No more events left for #{player_two}..."
@@ -87,7 +89,7 @@ simulations.each_with_index do |simulation, index|
       end
 
       # Check to continue player's turn or hand over the turn to the next player.
-      continue_turn = game_manager.continue_turn?(event_type, player_two, event_args)
+      continue_turn = game_manager.continue_turn?(event, player_two, args)
       if continue_turn
         puts "Continuing #{player_two}'s turn..."
       else

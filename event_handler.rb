@@ -16,13 +16,12 @@ class EventHandler
 
   # For each of the events received,
   # Perform the event and print status after the event.
-  def handle(event, args = {})
+  def handle(event, performed_by, args = {})
     unless valid_event(event, args)
       puts 'Invalid event. Event not registered.'
       return
     end
 
-    performed_by = args.delete(:performed_by)
     puts "Received (#{event} event), Performed By: #{performed_by}, Options: #{args.inspect}"
     game_manager.process_event(event, performed_by, args)
     puts "Completed (#{event} event)"
